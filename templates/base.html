@@ -1,0 +1,53 @@
+{% load static %}
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static '/css/bootstrap.min.css' %}">
+
+    <title>{% block title %}{% endblock %}</title>
+
+    {% block styles %}{% endblock %}
+  </head>
+  <body>
+    {% if not 'login' in request.path %}
+      <nav class="navbar navbar-expand-lg navbar-light bg-white">
+        <a class="navbar-brand" href="/">Segurança de Sistemas</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarColor01">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url "employees" %}">Usuários</a>
+            </li>
+            <li class="nav-item">
+                {% if 'edit' in request.path or 'view' in request.path %}
+                    <a class="nav-link" href="{% url "entries" %}?id={{ id }}">Logs</a>
+                {% else %}
+                    <a class="nav-link" href="{% url "entries" %}">Logs</a>
+                {% endif %}
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url "employee-new" %}">Adicionar novo</a>
+            </li>
+          </ul>
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'logout' %}">Sair</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    {% endif %}
+    {% block content %}{% endblock %}
+
+    <script src="{% static 'js/jquery-3.5.1.slim.min.js' %}"></script>'
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    {% block scripts %}{% endblock %}
+  </body>
+</html>

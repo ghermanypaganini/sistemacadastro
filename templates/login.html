@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Registro{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 offset-xs-12 offset-sm-12 offset-md-6 offset-lg-4">
+        <h3>Entrar</h3>
+        <form action="" method="POST">
+            {% if message is not None %}
+                <div class="alert alert-{{ message.type }}">{{ message.text }}</div>
+            {% endif %}
+            {% csrf_token %}
+            {% for f in form %}
+                <div class="form-group">{{ f.label }}{{ f }}
+                    {% for error in f.errors %}
+                        <div class="invalid-feedback"style="display: initial;">{{ error }}</div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+            <button type="submit" class="btn btn-primary">Entrar</button>
+        </form>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'js/scripts.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Registro{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 offset-xs-0 offset-sm-0 offset-md-1 offset-lg-1">
+    <h3 class="text-center">Registro</h3>
+    <br>
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 offset-xs-0 offset-sm-0 offset-md-3 offset-lg-3">
+        <form action="{% url 'entries' %}" type="get">
+            <div class="input-group mb-3">
+              <input name="name" type="text" value="{{ request.GET.name }}" class="form-control" placeholder="Buscar" aria-label="Buscar">
+              <div class="input-group-append">
+                <button type="submit" class="btn btn-primary">Buscar</button>
+              </div>
+            </div>
+        </form>
+    </div>
+    <hr>
+    <br>
+    <div class="table-employee">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Nome</th>
+              <th scope="col">Setor</th>
+              <th scope="col">Cargo</th>
+              <th scope="col">Horário</th>
+            </tr>
+          </thead>
+          <tbody>
+              {% for entry in entries %}
+                <tr>
+                  <th scope="row">{{ entry.id }}</th>
+                  <td>{{ entry.employee.name }}</td>
+                  <td>{{ entry.employee.position.area }}</td>
+                  <td>{{ entry.employee.position }}</td>
+                  <td>{{ entry.day }}</td>
+                  <td>{{ entry.getType }}</td>
+                </tr>
+              {% endfor %}
+          </tbody>
+        </table>
+    </div>
+
+    <ul class="pagination pagination-success justify-content-center mt-2">
+        {% for pg in entries.paginator.page_range %}
+            {% if entries.number == pg %}
+              <li class="page-item active"><a class="page-link" href="?page={{pg}}{% for key,value in request.GET.items %}{% ifnotequal key 'page' %}&{{ key }}={{ value }}{% endifnotequal %}{% endfor %}" class="btn active">{{pg}}</a></li>
+            {% else %}
+              <li class="page-item"><a class="page-link" href="?page={{pg}}{% for key,value in request.GET.items %}{% ifnotequal key 'page' %}&{{ key }}={{ value }}{% endifnotequal %}{% endfor %}" class="btn">{{pg}}</a></li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+    {% if message %}
+        <div class="alert alert-{{type}} text-center" role="alert">{{ message }}</div>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'js/scripts.js' %}"></script>
+{% endblock %}

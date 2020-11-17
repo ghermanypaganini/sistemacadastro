@@ -1,0 +1,73 @@
+body{
+    padding-top: 56px;
+}
+.navbar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+}
+
+h3{
+    margin-top: 10px;
+}
+form{
+    margin-top: 10px;
+}
+.btn{
+    width: 100%;
+}
+.form-group--hide{
+    display: none;
+}
+.alert{
+    margin-top: 20px;
+}
+.form-group{
+    margin-bottom: 0.2rem;
+}
+.table{
+    margin-bottom: 0;
+}
+.table-employee{
+    max-height: calc(100vh - 290px);
+    overflow: auto;
+}
+.buttonList{
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+.buttonList .btn{
+    max-width: 200px;
+    margin: 20px 10px 0;
+}
+tr,
+td {
+  text-align: center;
+}
+
+.table td {
+  text-align: center;
+}
+.form-group.blocked{
+    cursor: not-allowed;
+}
+.form-group.blocked input, .form-group.blocked select{
+    pointer-events: none;
+    background: #e8e8e8;
+}
+#digital{
+    display: inline-block;
+    padding: 20px;
+    text-align: center;
+    width: 100%;
+}
+#digital h6{
+    font-weight: 400;
+}
+#digital img{
+    width: 100%;
+    max-height: 50px;
+}
